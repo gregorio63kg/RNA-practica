@@ -1,0 +1,54 @@
+{
+    "component_name": "Neurona_Lego_Base",
+    "version": "1.0.0",
+    "type": "atomic_unit",
+    "description": "Unidad de procesamiento independiente con conectividad dinámica y autogestión de pesos.",
+    "structure": {
+        "inputs": {
+            "type": "dynamic_map",
+            "description": "Diccionario de conexiones entrantes mapeadas por UUID del origen.",
+            "properties": {
+                "source_id": "string",
+                "value": "float",
+                "weight": "float"
+            }
+        },
+        "internal_state": {
+            "bias": {
+                "type": "float",
+                "initialization": "random"
+            },
+            "activation_function": {
+                "type": "enum",
+                "options": [
+                    "relu",
+                    "sigmoid",
+                    "tanh",
+                    "linear"
+                ],
+                "default": "relu"
+            },
+            "error_buffer": {
+                "type": "float",
+                "description": "Almacén local para el gradiente de error (delta)."
+            }
+        },
+        "output": {
+            "type": "float",
+            "description": "Punto de difusión universal del resultado procesado."
+        }
+    },
+    "methods": {
+        "compute": "sum(inputs[i].value * inputs[i].weight) + bias",
+        "activate": "apply(activation_function, compute_result)",
+        "update": "weight = weight - (learning_rate * error_buffer * input_value)"
+    },
+    "lego_metadata": {
+        "snap_points": [
+            "input_array",
+            "output_pin"
+        ],
+        "is_pluggable": true,
+        "requires_orchestrator": false
+    }
+}
