@@ -58,7 +58,8 @@ if __name__ == "__main__":
     # --- Prueba de Funcionamiento ---
     
     # Datos de ejemplo
-    entradas_ejemplo = [0.8, -0.2, 0.5]
+    entradas_ejemplo = [0.8, -0.2, 0.5, 0.1]
+    entradas_ejemplo2 = [0.7, 0.2, 0.9]
     
     # 1. Crear neurona
     n1 = Neurona(
@@ -78,8 +79,8 @@ if __name__ == "__main__":
     n2 = Neurona(
         id="LEGO-N2", 
         tipo="atomic_unit", 
-        activacion="sigmoide", 
-        entradas=entradas_ejemplo
+        activacion="tang", 
+        entradas=entradas_ejemplo2
     )
     n2.procesar()
     n2.mostrar_estado()
