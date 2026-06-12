@@ -2,8 +2,6 @@ import numpy as np
 import math
 
 
-import numpy as np
-
 class FuncionesActivacion:
     def normalizacion(self):
         return (self.entradas - np.min(self.entradas)) / (np.max(self.entradas) - np.min(self.entradas))

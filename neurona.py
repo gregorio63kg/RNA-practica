@@ -22,7 +22,7 @@ class Neurona(FuncionesActivacion):
         if self.entradas is not None:
             # Inicialización aleatoria como define el idea.json
             return np.random.rand(len(self.entradas))
-        return None
+        return #None
 
     def iniciar_bias(self):
         return np.random.random()
@@ -30,7 +30,7 @@ class Neurona(FuncionesActivacion):
     def suma_ponderada(self):
         """Implementación de 'compute' según idea.json"""
         if self.entradas is None or self.pesos is None:
-            return 0
+            return None
         return np.dot(self.entradas, self.pesos) + self.bias
 
     def procesar(self):
@@ -41,6 +41,8 @@ class Neurona(FuncionesActivacion):
         if self.entradas is not None:
             # Equivale a compute + activate en el JSON
             self.salida = self.activar(self.f_activacion)
+        else:
+        	self.salida = 0
         return self.salida
 
     def mostrar_estado(self):
@@ -53,7 +55,18 @@ class Neurona(FuncionesActivacion):
         print(f"Bias        : {self.bias}")
         print(f"Salida (Out): {self.salida}")
         print("--------------------------------------\n")
-
+########################################################
+def tipo_act():
+	ta = np.random.randint(3)
+	if ta == 0:
+		tipo = "relu"
+	elif ta == 1:
+		tipo = "tang"
+	else:
+		tipo = "sigmoide"
+	return tipo
+########################################################
+	
 if __name__ == "__main__":
     # --- Prueba de Funcionamiento ---
     
@@ -65,9 +78,8 @@ if __name__ == "__main__":
     n1 = Neurona(
         id="LEGO-N1", 
         tipo="atomic_unit", 
-        activacion="relu", 
-        entradas=entradas_ejemplo
-    )
+        activacion= tipo_act(),
+        entradas= entradas_ejemplo)
     
     # 2. Procesar información
     n1.procesar()
@@ -76,11 +88,9 @@ if __name__ == "__main__":
     n1.mostrar_estado()
     
     # Prueba con Sigmoide
-    n2 = Neurona(
-        id="LEGO-N2", 
-        tipo="atomic_unit", 
-        activacion="tang", 
-        entradas=entradas_ejemplo2
-    )
-    n2.procesar()
-    n2.mostrar_estado()
+#    n2 = Neurona(  id="LEGO-N2", 
+#        tipo="atomic_unit", 
+#        activacion="tang", 
+#        entradas=entradas_ejemplo2)
+#    n2.procesar()
+#    n2.mostrar_estado()
